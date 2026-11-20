@@ -1,970 +1,984 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alto al Cyberbullying</title>
-    <style>
-        :root {
-            --navy: #0a1730;
-            --navy-2: #0f2244;
-            --navy-3: #16305c;
-            --coral: #ff5d73;
-            --coral-dark: #e03e56;
-            --mint: #4ee1c1;
-            --violet: #9b7bff;
-            --gold: #ffd166;
-            --white: #f7f9ff;
-            --muted: #a9bad8;
-            --glass: rgba(255, 255, 255, .06);
-            --line: rgba(255, 255, 255, .12);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, Tahoma, sans-serif;
-            color: var(--white);
-            line-height: 1.65;
-            min-height: 100vh;
-            background:
-                radial-gradient(1000px 600px at 12% -10%, rgba(155, 123, 255, .28), transparent 60%),
-                radial-gradient(900px 520px at 88% 0%, rgba(78, 225, 193, .18), transparent 60%),
-                radial-gradient(800px 600px at 50% 110%, rgba(255, 93, 115, .18), transparent 60%),
-                linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 55%, var(--navy) 100%);
-            background-attachment: fixed;
-        }
-
-        /* ---------- ENCABEZADO ---------- */
-        header {
-            position: relative;
-            padding: 34px 20px 40px;
-            text-align: center;
-            overflow: hidden;
-            border-bottom: 1px solid var(--line);
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--violet), var(--coral), var(--gold), var(--mint), var(--violet));
-            background-size: 300% 100%;
-            animation: correr 8s linear infinite;
-        }
-
-        @keyframes correr {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            100% {
-                background-position: 300% 50%;
-            }
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 22px;
-            flex-wrap: wrap;
-        }
-
-        /* ---------- LOGO ANIMADO ---------- */
-        .logo-marco {
-            position: relative;
-            width: 132px;
-            height: 132px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-        }
-
-        /* halo pulsante */
-        .logo-marco::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 93, 115, .55), transparent 68%);
-            animation: halo 2.6s ease-in-out infinite;
-        }
-
-        @keyframes halo {
-
-            0%,
-            100% {
-                transform: scale(.9);
-                opacity: .55;
-            }
-
-            50% {
-                transform: scale(1.15);
-                opacity: 1;
-            }
-        }
-
-        /* anillo giratorio */
-        .logo-marco::after {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            border-radius: 50%;
-            border: 2px dashed rgba(78, 225, 193, .5);
-            animation: girar 14s linear infinite;
-        }
-
-        @keyframes girar {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .logo-svg {
-            position: relative;
-            width: 104px;
-            height: 104px;
-            z-index: 2;
-            animation: flotarLogo 3.4s ease-in-out infinite;
-            filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .45));
-        }
-
-        @keyframes flotarLogo {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(-2deg);
-            }
-
-            50% {
-                transform: translateY(-9px) rotate(2deg);
-            }
-        }
-
-        /* el círculo del logo se dibuja solo */
-        .anillo-prohibido {
-            stroke-dasharray: 352;
-            stroke-dashoffset: 352;
-            animation: dibujar 3s ease forwards, latir 2.4s ease-in-out 3s infinite;
-        }
-
-        @keyframes dibujar {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        @keyframes latir {
-
-            0%,
-            100% {
-                stroke-width: 8;
-                opacity: 1;
-            }
-
-            50% {
-                stroke-width: 10;
-                opacity: .75;
-            }
-        }
-
-        /* la línea diagonal aparece después */
-        .linea-prohibido {
-            stroke-dasharray: 120;
-            stroke-dashoffset: 120;
-            animation: dibujarLinea 1s ease 1.2s forwards;
-        }
-
-        @keyframes dibujarLinea {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* las manos "saludan" */
-        .mano {
-            transform-origin: center;
-            animation: saludar 3.4s ease-in-out infinite;
-        }
-
-        .mano-izq {
-            animation-delay: 0s;
-        }
-
-        .mano-der {
-            animation-delay: .35s;
-        }
-
-        @keyframes saludar {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        header h1 {
-            font-size: clamp(1.7rem, 4.2vw, 3rem);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            line-height: 1.15;
-            background: linear-gradient(90deg, #fff 0%, var(--coral) 45%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        header p {
-            color: var(--muted);
-            margin-top: 10px;
-            font-size: 1rem;
-            letter-spacing: .4px;
-        }
-
-        /* ---------- CASITAS ---------- */
-        .casitas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 26px;
-            max-width: 1120px;
-            margin: 56px auto;
-            padding: 0 22px;
-        }
-
-        .casita {
-            position: relative;
-            background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03));
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 30px 26px;
-            overflow: hidden;
-            transition: transform .3s, box-shadow .3s, border-color .3s;
-        }
-
-        .casita::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .casita:nth-child(1)::before {
-            background: linear-gradient(90deg, var(--violet), var(--coral));
-        }
-
-        .casita:nth-child(2)::before {
-            background: linear-gradient(90deg, var(--coral), var(--gold));
-        }
-
-        .casita:nth-child(3)::before {
-            background: linear-gradient(90deg, var(--mint), var(--violet));
-        }
-
-        .casita:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, .28);
-            box-shadow: 0 22px 46px rgba(0, 0, 0, .45);
-        }
-
-        .casita .icono {
-            display: inline-grid;
-            place-items: center;
-            width: 58px;
-            height: 58px;
-            font-size: 1.8rem;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            background: rgba(255, 255, 255, .08);
-            border: 1px solid var(--line);
-        }
-
-        .casita h2 {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-        }
-
-        .casita:nth-child(1) h2 {
-            color: var(--violet);
-        }
-
-        .casita:nth-child(2) h2 {
-            color: var(--gold);
-        }
-
-        .casita:nth-child(3) h2 {
-            color: var(--mint);
-        }
-
-        .casita p,
-        .casita li {
-            color: var(--muted);
-            font-size: .95rem;
-        }
-
-        .casita ul {
-            padding-left: 18px;
-            margin-top: 10px;
-        }
-
-        .casita li {
-            margin-bottom: 4px;
-        }
-
-        .casita strong {
-            color: var(--white);
-        }
-
-        /* ---------- JUEGO ---------- */
-        .juego {
-            max-width: 920px;
-            margin: 10px auto 80px;
-            padding: 0 22px;
-        }
-
-        .juego h2 {
-            text-align: center;
-            font-size: clamp(1.5rem, 3.2vw, 2.1rem);
-            margin-bottom: 6px;
-        }
-
-        .juego .sub {
-            text-align: center;
-            color: var(--muted);
-            margin-bottom: 26px;
-        }
-
-        .panel {
-            background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03));
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--line);
-            border-radius: 22px;
-            padding: 30px 26px;
-            box-shadow: 0 18px 44px rgba(0, 0, 0, .4);
-        }
-
-        .barra {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 22px;
-            font-weight: 600;
-            font-size: .95rem;
-            color: var(--muted);
-        }
-
-        .barra .puntaje {
-            color: var(--gold);
-        }
-
-        .barra .vidas {
-            letter-spacing: 3px;
-        }
-
-        .escena {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 34px;
-            min-height: 180px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .persona {
-            position: relative;
-            width: 90px;
-            height: 150px;
-            animation: flotar 2.4s ease-in-out infinite;
-        }
-
-        .persona:nth-child(2) {
-            animation-delay: .4s;
-        }
-
-        .persona:nth-child(3) {
-            animation-delay: .8s;
-        }
-
-        @keyframes flotar {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        .cabeza {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: linear-gradient(180deg, #ffe0c4, #ffcda8);
-            margin: 0 auto;
-            position: relative;
-            border: 3px solid rgba(10, 23, 48, .85);
-        }
-
-        .cabeza::before,
-        .cabeza::after {
-            content: "";
-            position: absolute;
-            top: 20px;
-            width: 6px;
-            height: 6px;
-            background: #0a1730;
-            border-radius: 50%;
-        }
-
-        .cabeza::before {
-            left: 12px;
-        }
-
-        .cabeza::after {
-            right: 12px;
-        }
-
-        .boca {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 8px;
-            border-bottom: 3px solid #0a1730;
-            border-radius: 0 0 10px 10px;
-        }
-
-        .cuerpo {
-            width: 70px;
-            height: 80px;
-            margin: 4px auto 0;
-            border-radius: 18px 18px 10px 10px;
-            background: linear-gradient(180deg, var(--coral), var(--coral-dark));
-            box-shadow: 0 8px 18px rgba(0, 0, 0, .35);
-        }
-
-        .persona.azul .cuerpo {
-            background: linear-gradient(180deg, #6ea8ff, #3b6fd4);
-        }
-
-        .persona.verde .cuerpo {
-            background: linear-gradient(180deg, var(--mint), #22a98d);
-        }
-
-        .burbuja {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--white);
-            color: #0a1730;
-            font-size: .75rem;
-            font-weight: 800;
-            padding: 6px 12px;
-            border-radius: 14px;
-            white-space: nowrap;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
-            animation: aparecer .4s ease;
-        }
-
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translate(-50%, 10px) scale(.85);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate(-50%, 0) scale(1);
-            }
-        }
-
-        .pregunta {
-            text-align: center;
-            font-size: 1.12rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            min-height: 58px;
-        }
-
-        .opciones {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 14px;
-        }
-
-        .opciones button {
-            padding: 17px 18px;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            background: rgba(255, 255, 255, .05);
-            color: var(--white);
-            font-size: .98rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all .22s;
-            text-align: left;
-        }
-
-        .opciones button:hover:not(:disabled) {
-            background: linear-gradient(135deg, rgba(155, 123, 255, .28), rgba(255, 93, 115, .28));
-            border-color: var(--coral);
-            transform: translateY(-3px);
-        }
-
-        .opciones button.correcta {
-            background: linear-gradient(135deg, rgba(78, 225, 193, .35), rgba(34, 169, 141, .35));
-            border-color: var(--mint);
-        }
-
-        .opciones button.incorrecta {
-            background: linear-gradient(135deg, rgba(255, 93, 115, .35), rgba(224, 62, 86, .35));
-            border-color: var(--coral);
-        }
-
-        .opciones button:disabled {
-            cursor: default;
-        }
-
-        .feedback {
-            text-align: center;
-            margin-top: 20px;
-            font-weight: 600;
-            min-height: 30px;
-            font-size: .95rem;
-        }
-
-        .feedback.ok {
-            color: var(--mint);
-        }
-
-        .feedback.no {
-            color: #ff9aa8;
-        }
-
-        .siguiente {
-            display: block;
-            margin: 20px auto 0;
-            padding: 13px 36px;
-            background: linear-gradient(135deg, var(--coral), var(--violet));
-            color: #fff;
-            border: none;
-            border-radius: 32px;
-            font-size: 1rem;
-            font-family: inherit;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 26px rgba(255, 93, 115, .35);
-            transition: transform .2s, box-shadow .2s;
-        }
-
-        .siguiente:hover {
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 14px 32px rgba(155, 123, 255, .45);
-        }
-
-        .oculto {
-            display: none;
-        }
-
-        .final {
-            text-align: center;
-            padding: 16px 0 6px;
-        }
-
-        .final h3 {
-            font-size: 1.7rem;
-            margin-bottom: 12px;
-            color: var(--gold);
-        }
-
-        .final p {
-            margin-bottom: 18px;
-            color: var(--muted);
-        }
-
-        footer {
-            text-align: center;
-            padding: 26px 20px;
-            color: var(--muted);
-            font-size: .85rem;
-            border-top: 1px solid var(--line);
-        }
-
-        @media (max-width:520px) {
-            .escena {
-                gap: 18px;
-            }
-
-            .persona {
-                width: 74px;
-                height: 130px;
-            }
-
-            .cuerpo {
-                width: 58px;
-                height: 66px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZERO DAY // El lado oscuro del código</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --verde:#00ff88;
+    --verde-osc:#0a2b1c;
+    --negro:#050807;
+    --gris:#0d1411;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--negro);
+    color:#c9ffe4;
+    font-family:'Share Tech Mono',monospace;
+    overflow-x:hidden;
+  }
+  /* fondo binario animado */
+  #binario{
+    position:fixed;inset:0;z-index:0;opacity:.13;
+    pointer-events:none;
+    font-size:14px;line-height:1.1;color:var(--verde);
+    white-space:pre;overflow:hidden;
+  }
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* ---------- HEADER / LOGO ---------- */
+  header{
+    display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+    padding:40px 0 30px;border-bottom:1px solid #123a29;
+  }
+  .logo{
+    width:170px;height:170px;flex:0 0 auto;position:relative;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 40%, #0f3d29 0%, #050807 70%);
+    box-shadow:0 0 25px rgba(0,255,136,.35), inset 0 0 40px rgba(0,255,136,.12);
+    overflow:hidden;
+  }
+  .logo svg{width:100%;height:100%;display:block}
+  .logo::after{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 2px,transparent 2px 4px);
+    pointer-events:none;
+  }
+  .titular h1{
+    font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,5vw,3.4rem);
+    line-height:1;color:var(--verde);
+    text-shadow:0 0 12px rgba(0,255,136,.6), 0 0 40px rgba(0,255,136,.25);
+    letter-spacing:2px;
+  }
+  .titular h1 span{color:#fff}
+  .titular p{margin-top:12px;color:#6fbf9b;letter-spacing:3px;font-size:.85rem}
+  .cursor{display:inline-block;width:10px;height:1em;background:var(--verde);
+    animation:parp 1s steps(1) infinite;vertical-align:-2px}
+  @keyframes parp{50%{opacity:0}}
+
+  /* ---------- CUERPO ---------- */
+  section{padding:55px 0;border-bottom:1px dashed #123a29}
+  h2{
+    font-family:'Orbitron',sans-serif;font-size:1.5rem;color:var(--verde);
+    margin-bottom:22px;letter-spacing:1px;
+  }
+  h2::before{content:"// ";color:#2e7a5c}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+  .card{
+    background:linear-gradient(160deg,#0b1512,#070c0a);
+    border:1px solid #14402e;border-left:3px solid var(--verde);
+    padding:22px;position:relative;transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 0 22px rgba(0,255,136,.18);border-color:var(--verde)}
+  .card h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:#fff;margin-bottom:10px}
+  .card p{font-size:.92rem;line-height:1.65;color:#9fdcc3}
+  .card .num{position:absolute;right:14px;top:10px;font-size:2.2rem;color:#123a29;font-weight:bold}
+
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+  @media(max-width:760px){.split{grid-template-columns:1fr}}
+  .terminal{
+    background:#04100b;border:1px solid #14402e;padding:18px;
+    font-size:.85rem;line-height:1.7;color:#5fe3ab;
+    box-shadow:inset 0 0 30px rgba(0,255,136,.06);
+  }
+  .terminal .prompt{color:var(--verde)}
+  .terminal .out{color:#3f8f6f}
+  .ilustracion{
+    border:1px solid #14402e;background:#060d0a;padding:10px;
+    box-shadow:0 0 25px rgba(0,255,136,.12);
+  }
+  .ilustracion svg{width:100%;height:auto;display:block}
+
+  .datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:26px}
+  .dato{border:1px solid #14402e;padding:18px;text-align:center;background:#070d0b}
+  .dato b{display:block;font-family:'Orbitron',sans-serif;font-size:1.7rem;color:var(--verde);
+    text-shadow:0 0 14px rgba(0,255,136,.5)}
+  .dato span{font-size:.78rem;color:#6fbf9b;letter-spacing:1px}
+
+  .lista{list-style:none;display:grid;gap:12px;margin-top:6px}
+  .lista li{padding-left:26px;position:relative;font-size:.93rem;line-height:1.6;color:#9fdcc3}
+  .lista li::before{content:"▸";position:absolute;left:0;color:var(--verde)}
+
+  /* ---------- JUEGO ---------- */
+  #juego{background:radial-gradient(circle at 50% 0%,#0a1f16,#050807 70%)}
+  .panel{
+    border:1px solid #14402e;background:#060d0a;padding:26px;text-align:center;
+  }
+  #qrBox{display:flex;justify-content:center;padding:18px;background:#fff;width:max-content;margin:0 auto 16px}
+  .btn{
+    font-family:'Orbitron',sans-serif;font-size:.9rem;letter-spacing:2px;
+    background:transparent;color:var(--verde);border:1px solid var(--verde);
+    padding:12px 26px;cursor:pointer;transition:.2s;margin-top:6px;
+  }
+  .btn:hover{background:var(--verde);color:#03130c;box-shadow:0 0 22px rgba(0,255,136,.5)}
+  .hint{font-size:.8rem;color:#5c9c81;margin-top:12px}
+
+  /* overlay alerta */
+  #alerta{
+    position:fixed;inset:0;z-index:50;display:none;
+    background:rgba(0,0,0,.92);
+    align-items:center;justify-content:center;flex-direction:column;gap:30px;
+    cursor:pointer;
+  }
+  #alerta.on{display:flex}
+  .alerta-signo{
+    width:130px;height:110px;position:relative;
+    background:#ffd400;clip-path:polygon(50% 0,100% 100%,0 100%);
+    display:flex;align-items:flex-end;justify-content:center;
+    animation:pulso .8s infinite alternate;
+  }
+  .alerta-signo span{font-family:'Orbitron',sans-serif;font-size:3.4rem;color:#000;
+    font-weight:900;line-height:1;margin-bottom:8px}
+  @keyframes pulso{from{filter:drop-shadow(0 0 6px #ffd400)}to{filter:drop-shadow(0 0 34px #ffd400)}}
+  #alertaTexto{
+    font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,5vw,2.8rem);
+    color:#ffd400;text-align:center;letter-spacing:2px;padding:0 20px;
+    text-shadow:0 0 18px rgba(255,212,0,.6);
+    animation:zoom 1.6s ease-in-out infinite;
+  }
+  @keyframes zoom{0%,100%{transform:scale(.85)}50%{transform:scale(1.18)}}
+  .flecha{
+    font-size:3rem;color:#ffd400;animation:desliza 1s infinite;
+  }
+  @keyframes desliza{0%,100%{transform:translateX(0)}50%{transform:translateX(22px)}}
+
+  /* formulario */
+  #formBox{display:none;flex-direction:column;gap:16px;max-width:340px;width:90%}
+  #formBox.on{display:flex}
+  #formBox label{font-size:.85rem;color:#ffd400;letter-spacing:1px}
+  #formBox input,#formBox select{
+    width:100%;padding:12px;background:#0b0b0b;border:1px solid #ffd400;
+    color:#fff;font-family:'Share Tech Mono',monospace;font-size:1rem;
+  }
+  #formBox .btn{border-color:#ffd400;color:#ffd400}
+  #formBox .btn:hover{background:#ffd400;color:#000}
+
+  /* canvas juego */
+  #gameWrap{display:none;position:relative;margin-top:20px}
+  #gameWrap.on{display:block}
+  #game{width:100%;max-width:960px;display:block;margin:0 auto;
+    border:1px solid #14402e;background:#0a1410;image-rendering:pixelated}
+  #hud{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    max-width:960px;margin:0 auto 10px;font-size:.85rem;color:#7fe0b4;
+  }
+  #hud b{color:var(--verde)}
+  #mensaje{
+    position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    flex-direction:column;gap:16px;background:rgba(0,0,0,.75);text-align:center;padding:20px;
+  }
+  #mensaje.on{display:flex}
+  #mensaje h3{font-family:'Orbitron',sans-serif;color:var(--verde);font-size:1.6rem}
+  #mensaje p{color:#9fdcc3;font-size:.95rem}
+  .controles{max-width:960px;margin:10px auto 0;font-size:.8rem;color:#5c9c81;text-align:center}
+</style>
 </head>
-
 <body>
 
-    <!-- ============ ENCABEZADO ============ -->
-    <header>
-        <div class="logo">
-            <div class="logo-marco">
-                <svg class="logo-svg" viewBox="0 0 120 120" aria-label="Logo: alto al cyberbullying">
-                    <defs>
-                        <linearGradient id="gradRojo" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#ff8a9b" />
-                            <stop offset="100%" stop-color="#e03e56" />
-                        </linearGradient>
-                        <linearGradient id="gradMano" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#ffffff" />
-                            <stop offset="100%" stop-color="#cfe0ff" />
-                        </linearGradient>
-                    </defs>
+<div id="binario" aria-hidden="true"></div>
 
-                    <!-- círculo de prohibido (se dibuja solo) -->
-                    <circle class="anillo-prohibido" cx="60" cy="60" r="56" fill="none" stroke="url(#gradRojo)"
-                        stroke-width="8" />
+<div class="wrap">
 
-                    <!-- mano izquierda -->
-                    <path class="mano mano-izq"
-                        d="M22 78 V52 a4 4 0 0 1 8 0 v-8 a4 4 0 0 1 8 0 v-4 a4 4 0 0 1 8 0 v6 a4 4 0 0 1 8 0 v32 c0 8 -6 14 -14 14 h-6 c-6 0 -12 -6 -12 -14z"
-                        fill="url(#gradMano)" />
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="logo">
+      <!-- Logo: encapuchado con binario de fondo -->
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#00ff88" stop-opacity=".45"/>
+            <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="200" height="200" fill="#040a07"/>
+        <!-- binario de fondo -->
+        <g fill="#00ff88" font-family="monospace" font-size="9" opacity=".55">
+          <text x="8" y="18">01001</text><text x="8" y="34">10110</text>
+          <text x="8" y="50">00111</text><text x="8" y="66">11000</text>
+          <text x="8" y="82">01101</text><text x="8" y="98">10011</text>
+          <text x="8" y="114">01010</text><text x="8" y="130">11100</text>
+          <text x="8" y="146">00101</text><text x="8" y="162">11011</text>
+          <text x="8" y="178">01000</text>
+          <text x="160" y="18">11010</text><text x="160" y="34">00101</text>
+          <text x="160" y="50">10011</text><text x="160" y="66">01110</text>
+          <text x="160" y="82">10100</text><text x="160" y="98">01001</text>
+          <text x="160" y="114">11101</text><text x="160" y="130">00011</text>
+          <text x="160" y="146">10110</text><text x="160" y="162">01100</text>
+          <text x="160" y="178">11001</text>
+        </g>
+        <circle cx="100" cy="100" r="80" fill="url(#glow)"/>
+        <!-- capucha -->
+        <path d="M100 28 C58 28 40 66 42 104 C44 140 62 168 100 172 C138 168 156 140 158 104 C160 66 142 28 100 28 Z"
+              fill="#0b1a13" stroke="#00ff88" stroke-width="2.5"/>
+        <!-- rostro en sombra -->
+        <path d="M100 56 C76 56 66 78 68 100 C70 124 82 142 100 146 C118 142 130 124 132 100 C134 78 124 56 100 56 Z"
+              fill="#020604"/>
+        <!-- ojos brillantes -->
+        <rect x="80" y="94" width="14" height="5" rx="2" fill="#00ff88"/>
+        <rect x="106" y="94" width="14" height="5" rx="2" fill="#00ff88"/>
+        <path d="M80 94 l14 0" stroke="#b6ffdd" stroke-width="1"/>
+        <!-- borde de la capucha -->
+        <path d="M100 28 C58 28 40 66 42 104 C44 140 62 168 100 172"
+              fill="none" stroke="#00ff88" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="titular">
+      <h1>ZERO<span>_</span>DAY</h1>
+      <p>EL LADO OSCURO DEL CÓDIGO<span class="cursor"></span></p>
+    </div>
+  </header>
 
-                    <!-- mano derecha (espejada) -->
-                    <path class="mano mano-der"
-                        d="M22 78 V52 a4 4 0 0 1 8 0 v-8 a4 4 0 0 1 8 0 v-4 a4 4 0 0 1 8 0 v6 a4 4 0 0 1 8 0 v32 c0 8 -6 14 -14 14 h-6 c-6 0 -12 -6 -12 -14z"
-                        fill="url(#gradMano)" transform="translate(120 0) scale(-1 1)" />
+  <!-- ================= CUERPO ================= -->
+  <section>
+    <h2>¿Qué es un hacker?</h2>
+    <div class="split">
+      <div>
+        <p style="line-height:1.8;color:#9fdcc3;font-size:.95rem">
+          Un <b style="color:var(--verde)">hacker</b> es alguien que entiende cómo funcionan los sistemas
+          por dentro y los explora más allá de lo que el manual indica. No es un delincuente por definición:
+          la palabra describe una <i>curiosidad técnica</i> y una forma de pensar. La diferencia está en la ética
+          con la que se usa ese conocimiento.
+        </p>
+        <ul class="lista" style="margin-top:20px">
+          <li><b>White hat:</b> busca fallas para reportarlas y que se arreglen.</li>
+          <li><b>Black hat:</b> usa las fallas para beneficio propio o daño.</li>
+          <li><b>Grey hat:</b> mezcla ambas, sin permiso pero sin mala intención.</li>
+          <li><b>Script kiddie:</b> usa herramientas ajenas sin entenderlas.</li>
+        </ul>
+      </div>
+      <div class="ilustracion">
+        <!-- Ilustración: pantalla con código y candado -->
+        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="240" fill="#050d09"/>
+          <rect x="14" y="14" width="292" height="212" fill="none" stroke="#00ff88" stroke-width="2"/>
+          <rect x="14" y="14" width="292" height="24" fill="#0b2a1c"/>
+          <circle cx="28" cy="26" r="4" fill="#00ff88"/>
+          <circle cx="42" cy="26" r="4" fill="#0f5"/>
+          <circle cx="56" cy="26" r="4" fill="#0a3"/>
+          <g font-family="monospace" font-size="10" fill="#00ff88">
+            <text x="28" y="60">$ sudo access --root</text>
+            <text x="28" y="78" fill="#3f8f6f">[ok] handshake establecido</text>
+            <text x="28" y="96">$ scan 192.168.0.0/24</text>
+            <text x="28" y="114" fill="#3f8f6f">[ok] 12 hosts activos</text>
+            <text x="28" y="132">$ decrypt payload.bin</text>
+            <text x="28" y="150" fill="#3f8f6f">[ok] clave encontrada</text>
+            <text x="28" y="168">$ _</text>
+          </g>
+          <!-- candado -->
+          <g transform="translate(232,150)">
+            <rect x="0" y="22" width="46" height="38" rx="4" fill="#00ff88"/>
+            <path d="M10 22 v-10 a13 13 0 0 1 26 0 v10" fill="none" stroke="#00ff88" stroke-width="5"/>
+            <circle cx="23" cy="40" r="5" fill="#050d09"/>
+          </g>
+        </svg>
+      </div>
+    </div>
 
-                    <!-- línea diagonal (aparece después) -->
-                    <line class="linea-prohibido" x1="22" y1="98" x2="98" y2="22" stroke="url(#gradRojo)"
-                        stroke-width="8" stroke-linecap="round" />
-                </svg>
-            </div>
+    <div class="datos">
+      <div class="dato"><b>1971</b><span>PRIMER VIRUS (CREEPER)</span></div>
+      <div class="dato"><b>1984</b><span>NACE EL TÉRMINO "HACKER"</span></div>
+      <div class="dato"><b>1998</b><span>PRIMER CONGRESO DEF CON</span></div>
+      <div class="dato"><b>0 y 1</b><span>EL IDIOMA DEL BINARIO</span></div>
+    </div>
+  </section>
 
-            <div>
-                <h1>Alto al Cyberbullying</h1>
-                <p>Respeto, empatía y valentía en la red</p>
-            </div>
+  <section>
+    <h2>Datos interesantes</h2>
+    <div class="grid">
+      <div class="card"><span class="num">01</span>
+        <h3>El primer "hack" fue un tren</h3>
+        <p>En 1903, un mago llamado Nevil Maskelyne interrumpió una demostración de telegrafía inalámbrica
+        enviando mensajes insultantes. Fue uno de los primeros hackeos documentados de una transmisión.</p>
+      </div>
+      <div class="card"><span class="num">02</span>
+        <h3>El binario es solo un idioma</h3>
+        <p>Todo lo que ves en una pantalla —texto, fotos, música— es una secuencia de ceros y unos.
+        Cada carácter tiene su propio código, y ahí vive toda la información digital.</p>
+      </div>
+      <div class="card"><span class="num">03</span>
+        <h3>El pingüino más famoso</h3>
+        <p>Linux, el sistema operativo de código abierto que corre en la mayoría de los servidores del mundo,
+        nació en 1991 como un proyecto personal de un estudiante finlandés.</p>
+      </div>
+      <div class="card"><span class="num">04</span>
+        <h3>Bug bounty</h3>
+        <p>Muchas empresas pagan a hackers éticos por encontrar fallas antes que los atacantes.
+        Es una de las carreras mejor pagadas del mundo tecnológico.</p>
+      </div>
+      <div class="card"><span class="num">05</span>
+        <h3>La contraseña más usada</h3>
+        <p>Año tras año, "123456" encabeza las listas de contraseñas filtradas. Un recordatorio de que
+        la seguridad empieza por lo básico.</p>
+      </div>
+      <div class="card"><span class="num">06</span>
+        <h3>Anonymous no es una persona</h3>
+        <p>Es un colectivo descentralizado sin líderes ni sede. Su símbolo, la máscara de Guy Fawkes,
+        viene de una novela gráfica y de una película.</p>
+      </div>
+    </div>
+
+    <div class="terminal" style="margin-top:30px">
+      <div><span class="prompt">hacker@zero:~$</span> whoami</div>
+      <div class="out">curioso, autodidacta, ético</div>
+      <div><span class="prompt">hacker@zero:~$</span> cat filosofia.txt</div>
+      <div class="out">"El mundo está lleno de problemas esperando ser resueltos."</div>
+      <div><span class="prompt">hacker@zero:~$</span> _</div>
+    </div>
+  </section>
+
+  <!-- ================= JUEGO ================= -->
+  <section id="juego">
+    <h2>Poné a prueba tus reflejos</h2>
+    <div class="panel" id="panelInicio">
+      <p style="color:#9fdcc3;margin-bottom:18px">Escaneá el código con tu celular para empezar.</p>
+      <div id="qrBox"><div id="qrcode"></div></div>
+      <p class="hint">¿No podés escanear? <a href="#" id="saltar" style="color:var(--verde)">Entrá igual</a></p>
+    </div>
+
+    <div id="gameWrap">
+      <div id="hud">
+        <span>VIDAS: <b id="vidas">♥♥</b></span>
+        <span>ÚTILES: <b id="puntos">0</b>/10</span>
+        <span>DISTANCIA: <b id="dist">0</b>/5 m</span>
+      </div>
+      <div style="position:relative;max-width:960px;margin:0 auto">
+        <canvas id="game" width="960" height="420"></canvas>
+        <div id="mensaje">
+          <h3 id="msgTitulo"></h3>
+          <p id="msgTexto"></p>
+          <button class="btn" id="msgBtn">REINTENTAR</button>
         </div>
-    </header>
+      </div>
+      <p class="controles">← → o A / D para moverse · ESPACIO o ↑ para saltar · En celular: tocá la mitad izquierda o derecha</p>
+    </div>
+  </section>
 
-    <!-- ============ LAS 3 CASITAS ============ -->
-    <section class="casitas">
-        <article class="casita">
-            <span class="icono">🧠</span>
-            <h2>¿Qué es el cyberbullying?</h2>
-            <p>Es el acoso que ocurre a través de celulares, redes sociales, chats y videojuegos. Incluye mensajes
-                hirientes, burlas, rumores, exclusión y compartir fotos sin permiso.</p>
-            <ul>
-                <li>Puede pasar las 24 horas</li>
-                <li>Llega a mucha gente muy rápido</li>
-                <li>Deja huellas digitales</li>
-            </ul>
-        </article>
+</div>
 
-        <article class="casita">
-            <span class="icono">🚨</span>
-            <h2>Señales de alerta</h2>
-            <p>Prestá atención si alguien:</p>
-            <ul>
-                <li>Se enoja o se pone nervioso al ver el celular</li>
-                <li>Se aísla o no quiere ir a la escuela</li>
-                <li>Borra cuentas o cambia de número</li>
-                <li>Se pone triste, ansioso o irritable</li>
-            </ul>
-        </article>
+<!-- ================= OVERLAY ALERTA ================= -->
+<div id="alerta">
+  <div class="alerta-signo"><span>!</span></div>
+  <div id="alertaTexto">TU DISPOSITIVO HA SIDO HACKEADO</div>
+  <div class="flecha">➜</div>
+  <form id="formBox">
+    <label for="nombre">NOMBRE</label>
+    <input id="nombre" type="text" maxlength="16" placeholder="Escribí tu nombre" required>
+    <label for="genero">GÉNERO</label>
+    <select id="genero" required>
+      <option value="">Elegí una opción</option>
+      <option value="f">Femenino</option>
+      <option value="m">Masculino</option>
+    </select>
+    <button class="btn" type="submit">CONTINUAR ➜</button>
+  </form>
+</div>
 
-        <article class="casita">
-            <span class="icono">🤝</span>
-            <h2>¿Qué podés hacer?</h2>
-            <ul>
-                <li><strong>No respondas</strong> con más agresión</li>
-                <li><strong>Guardá pruebas</strong> (capturas de pantalla)</li>
-                <li><strong>Bloqueá y reportá</strong> al agresor</li>
-                <li><strong>Contale</strong> a un adulto de confianza</li>
-                <li><strong>Apoyá</strong> a quien lo sufre</li>
-            </ul>
-        </article>
-    </section>
+<script>
+/* ============ FONDO BINARIO ============ */
+(function(){
+  const el = document.getElementById('binario');
+  let out = '';
+  for(let i=0;i<90;i++){
+    let line='';
+    for(let j=0;j<160;j++) line += Math.random()>.5?'1':'0';
+    out += line+'\n';
+  }
+  el.textContent = out;
+  setInterval(()=>{
+    el.textContent = el.textContent.replace(/[01]/g, ()=> Math.random()>.5?'1':'0');
+  }, 400);
+})();
 
-    <!-- ============ JUEGO INTERACTIVO ============ -->
-    <section class="juego">
-        <h2>🎮 Juego: "Guardián de la Red"</h2>
-        <p class="sub">Ayudá a los personajes a tomar la mejor decisión. ¡Tenés 3 vidas!</p>
+/* ============ QR ============ */
+new QRCode(document.getElementById('qrcode'), {
+  text: "ESCANEAME",
+  width: 180,
+  height: 180,
+  colorDark: "#000000",
+  colorLight: "#ffffff",
+  correctLevel: QRCode.CorrectLevel.H
+});
 
-        <div class="panel">
-            <div class="barra">
-                <span>Pregunta <span id="numPregunta">1</span> de <span id="totalPreguntas">6</span></span>
-                <span class="puntaje">⭐ Puntos: <span id="puntos">0</span></span>
-                <span class="vidas" id="vidas">❤️❤️❤️</span>
-            </div>
+/* ============ AUDIO (pitido) ============ */
+let audioCtx = null;
+function pitido(){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'square';
+    o.frequency.value = 880;
+    g.gain.value = 0.08;
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    o.stop(audioCtx.currentTime + 0.35);
+    setTimeout(()=>{
+      const o2 = audioCtx.createOscillator();
+      const g2 = audioCtx.createGain();
+      o2.type='square'; o2.frequency.value=1100; g2.gain.value=0.08;
+      o2.connect(g2); g2.connect(audioCtx.destination);
+      o2.start(); o2.stop(audioCtx.currentTime+0.35);
+    }, 420);
+  }catch(e){}
+}
 
-            <div class="escena" id="escena">
-                <div class="persona">
-                    <div class="cabeza">
-                        <div class="boca"></div>
-                    </div>
-                    <div class="cuerpo"></div>
-                </div>
-                <div class="persona azul">
-                    <div class="cabeza">
-                        <div class="boca"></div>
-                    </div>
-                    <div class="cuerpo"></div>
-                </div>
-                <div class="persona verde">
-                    <div class="cabeza">
-                        <div class="boca"></div>
-                    </div>
-                    <div class="cuerpo"></div>
-                </div>
-            </div>
+/* ============ FLUJO ALERTA ============ */
+const alerta = document.getElementById('alerta');
+const formBox = document.getElementById('formBox');
+const alertaTexto = document.getElementById('alertaTexto');
+let pitidoInterval = null;
 
-            <p class="pregunta" id="pregunta">Cargando...</p>
+function abrirAlerta(){
+  alerta.classList.add('on');
+  pitido();
+  pitidoInterval = setInterval(pitido, 1400);
+}
 
-            <div class="opciones" id="opciones"></div>
+alerta.addEventListener('click', (e)=>{
+  if(e.target.closest('#formBox')) return;
+  // al tocar la alerta aparece el formulario (la flecha)
+  formBox.classList.add('on');
+});
 
-            <p class="feedback" id="feedback"></p>
+document.getElementById('saltar').addEventListener('click', (e)=>{
+  e.preventDefault();
+  abrirAlerta();
+});
 
-            <button class="siguiente oculto" id="btnSiguiente">Siguiente ➜</button>
+/* ============ DATOS DEL JUGADOR ============ */
+let jugador = { nombre:'', genero:'f' };
 
-            <div class="final oculto" id="final">
-                <h3 id="tituloFinal"></h3>
-                <p id="textoFinal"></p>
-                <button class="siguiente" id="btnReiniciar">🔁 Jugar de nuevo</button>
-            </div>
-        </div>
-    </section>
+document.getElementById('formBox').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const n = document.getElementById('nombre').value.trim();
+  const g = document.getElementById('genero').value;
+  if(!n || !g) return;
+  jugador.nombre = n;
+  jugador.genero = g;
+  clearInterval(pitidoInterval);
+  alerta.classList.remove('on');
+  iniciarJuego();
+});
 
-    <footer>Hecho con empatía 💙 — Compartí respeto, no bullying.</footer>
+/* ============ JUEGO ============ */
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const gameWrap = document.getElementById('gameWrap');
+const msg = document.getElementById('mensaje');
+const msgTitulo = document.getElementById('msgTitulo');
+const msgTexto = document.getElementById('msgTexto');
+const msgBtn = document.getElementById('msgBtn');
+const hudVidas = document.getElementById('vidas');
+const hudPuntos = document.getElementById('puntos');
+const hudDist = document.getElementById('dist');
 
-    <script>
-        // ---------- Datos del juego ----------
-        const preguntas = [
-            {
-                texto: "Lucía recibe mensajes feos en el chat del grupo. ¿Qué debería hacer?",
-                opciones: [
-                    "Responder con insultos más fuertes",
-                    "Guardar capturas, bloquear y contarle a un adulto",
-                    "Borrar todo y no decir nada"
-                ],
-                correcta: 1,
-                explicacion: "Guardar pruebas y pedir ayuda es lo más seguro. Responder con agresión solo empeora la situación."
-            },
-            {
-                texto: "Tomás ve que a un compañero le hacen memes burlándose de él. ¿Qué hace?",
-                opciones: [
-                    "Los comparte para reírse con todos",
-                    "No dice nada, no es su problema",
-                    "No los comparte y le escribe para apoyarlo"
-                ],
-                correcta: 2,
-                explicacion: "No compartir y mostrar apoyo puede cambiarle el día a alguien. Los testigos son clave."
-            },
-            {
-                texto: "Una amiga te cuenta que la están acosando en redes. ¿Qué le decís?",
-                opciones: [
-                    "Que es su culpa por publicar fotos",
-                    "Que le creés y que juntos pueden hablar con un adulto",
-                    "Que lo ignore y ya va a pasar"
-                ],
-                correcta: 1,
-                explicacion: "Creer y acompañar es fundamental. Nunca es culpa de quien sufre el acoso."
-            },
-            {
-                texto: "Alguien te pide la contraseña de tu cuenta para 'jugar una broma'. ¿Qué hacés?",
-                opciones: [
-                    "Se la das, es un amigo",
-                    "No se la das y le explicás por qué es peligroso",
-                    "Se la das pero después la cambiás"
-                ],
-                correcta: 1,
-                explicacion: "Las contraseñas son privadas. Compartirlas puede terminar en suplantación de identidad."
-            },
-            {
-                texto: "Ves una foto privada de una compañera circulando sin su permiso. ¿Qué hacés?",
-                opciones: [
-                    "La reenvío a otros grupos",
-                    "La borro y aviso a un adulto responsable",
-                    "La guardo por si acaso"
-                ],
-                correcta: 1,
-                explicacion: "Compartir imágenes sin permiso es acoso y puede ser delito. Borrar y avisar es lo correcto."
-            },
-            {
-                texto: "Un desconocido empieza a insultarte en un videojuego. ¿Qué es lo mejor?",
-                opciones: [
-                    "Insultarlo más fuerte para que se calle",
-                    "Reportarlo, silenciarlo y seguir jugando",
-                    "Darle tu número para arreglarlo en privado"
-                ],
-                correcta: 1,
-                explicacion: "Reportar y silenciar te protege. Nunca compartas datos personales con desconocidos."
-            }
-        ];
+let estado = 'idle'; // idle | corriendo | muerto | ganado
+let mundo = {};
 
-        // ---------- Estado ----------
-        let indice = 0;
-        let puntos = 0;
-        let vidas = 3;
-        let respondido = false;
+const SUELO = H - 70;          // línea del piso del pasillo
+const LARGO_MUNDO = 1500;      // 5 metros aprox (300 px por metro)
+const META_X = LARGO_MUNDO - 220;
 
-        const $ = id => document.getElementById(id);
+function iniciarJuego(){
+  gameWrap.classList.add('on');
+  gameWrap.scrollIntoView({behavior:'smooth', block:'center'});
+  resetJuego();
+}
 
-        function iniciarJuego() {
-            indice = 0;
-            puntos = 0;
-            vidas = 3;
-            $('final').classList.add('oculto');
-            $('totalPreguntas').textContent = preguntas.length;
-            actualizarBarra();
-            mostrarPregunta();
-        }
+function resetJuego(){
+  msg.classList.remove('on');
+  estado = 'corriendo';
+  mundo = {
+    camX: 0,
+    tiempo: 0,
+    jugador: {
+      x: 60, y: SUELO, vy: 0,
+      enSuelo: true, vidas: 2, invuln: 0,
+      puntos: 0, frame: 0, baile: 0
+    },
+    obstaculos: [],
+    coleccionables: [],
+    particulas: [],
+    meta: META_X
+  };
 
-        function actualizarBarra() {
-            $('numPregunta').textContent = Math.min(indice + 1, preguntas.length);
-            $('puntos').textContent = puntos;
-            const llenas = Math.max(vidas, 0);
-            $('vidas').textContent = '❤️'.repeat(llenas) + '🖤'.repeat(3 - llenas);
-        }
+  // obstáculos: binario, números, anonymous
+  const tipos = ['binario','numero','anonimus','binario','numero'];
+  for(let i=0;i<9;i++){
+    mundo.obstaculos.push({
+      x: 380 + i*130 + Math.random()*40,
+      y: SUELO,
+      w: 42, h: 46,
+      tipo: tipos[i % tipos.length],
+      fase: Math.random()*6
+    });
+  }
 
-        function mostrarPregunta() {
-            respondido = false;
-            const p = preguntas[indice];
-            $('pregunta').textContent = p.texto;
-            $('feedback').textContent = '';
-            $('feedback').className = 'feedback';
-            $('btnSiguiente').classList.add('oculto');
+  // coleccionables: lápices, fibras, reglas
+  const utiles = ['lapiz','fibra','regla','lapiz','fibra','regla','lapiz','fibra','regla','lapiz'];
+  utiles.forEach((t,i)=>{
+    mundo.coleccionables.push({
+      x: 300 + i*130,
+      y: SUELO - 90 - (i%2)*40,
+      w: 26, h: 26,
+      tipo: t,
+      tomado: false,
+      fase: i
+    });
+  });
 
-            const cont = $('opciones');
-            cont.innerHTML = '';
+  actualizarHUD();
+}
 
-            p.opciones.forEach((op, i) => {
-                const btn = document.createElement('button');
-                btn.textContent = op;
-                btn.addEventListener('click', () => responder(i, btn));
-                cont.appendChild(btn);
-            });
+function actualizarHUD(){
+  hudVidas.textContent = '♥'.repeat(Math.max(0,mundo.jugador.vidas));
+  hudPuntos.textContent = mundo.jugador.puntos;
+  const metros = Math.min(5, (mundo.jugador.x / LARGO_MUNDO * 5)).toFixed(1);
+  hudDist.textContent = metros;
+}
 
-            actualizarBarra();
-        }
+/* ---------- controles ---------- */
+const teclas = {};
+document.addEventListener('keydown', e=>{
+  teclas[e.key.toLowerCase()] = true;
+  if(['arrowup',' ','arrowleft','arrowright'].includes(e.key.toLowerCase())) e.preventDefault();
+});
+document.addEventListener('keyup', e=>{ teclas[e.key.toLowerCase()] = false; });
 
-        function responder(i, btn) {
-            if (respondido) return;
-            respondido = true;
+let toque = { izq:false, der:false, salto:false };
+canvas.addEventListener('touchstart', e=>{
+  const r = canvas.getBoundingClientRect();
+  for(const t of e.changedTouches){
+    const x = t.clientX - r.left;
+    if(x < r.width/2) toque.izq = true; else toque.der = true;
+    toque.salto = true;
+  }
+  e.preventDefault();
+}, {passive:false});
+canvas.addEventListener('touchend', ()=>{ toque.izq=toque.der=toque.salto=false; });
 
-            const p = preguntas[indice];
-            const botones = document.querySelectorAll('#opciones button');
-            botones.forEach(b => b.disabled = true);
+/* ---------- dibujo de personajes 2D game ---------- */
+function dibujarPersonaje(cx, cy, genero, frame, baile){
+  ctx.save();
+  ctx.translate(cx, cy);
 
-            if (i === p.correcta) {
-                btn.classList.add('correcta');
-                puntos += 10;
-                $('feedback').textContent = '✅ ¡Correcto! ' + p.explicacion;
-                $('feedback').className = 'feedback ok';
-                mostrarBurbuja('¡Genial!');
-            } else {
-                btn.classList.add('incorrecta');
-                botones[p.correcta].classList.add('correcta');
-                vidas--;
-                $('feedback').textContent = '❌ Casi. ' + p.explicacion;
-                $('feedback').className = 'feedback no';
-                mostrarBurbuja('¡Uy!');
-            }
+  const paso = Math.sin(frame*0.35);
+  const bob = baile ? Math.sin(frame*0.25)*4 : Math.abs(paso)*2;
+  ctx.translate(0, -bob);
 
-            actualizarBarra();
+  // sombra
+  ctx.fillStyle = 'rgba(0,0,0,.45)';
+  ctx.beginPath(); ctx.ellipse(0, 4, 18, 5, 0, 0, Math.PI*2); ctx.fill();
 
-            if (vidas <= 0) {
-                setTimeout(() => terminar(false), 1200);
-                return;
-            }
+  // piernas
+  const pierna = baile ? Math.sin(frame*0.3)*6 : paso*7;
+  ctx.strokeStyle = '#1a2a4a'; ctx.lineWidth = 7; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(-5,-22); ctx.lineTo(-5+pierna,-4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(5,-22); ctx.lineTo(5-pierna,-4); ctx.stroke();
 
-            $('btnSiguiente').classList.remove('oculto');
-            $('btnSiguiente').textContent = (indice === preguntas.length - 1) ? 'Ver resultado 🏁' : 'Siguiente ➜';
-        }
+  // medias
+  ctx.strokeStyle = genero==='f' ? '#2b6fd6' : '#1b2b
+  // medias
+  ctx.strokeStyle = genero==='f' ? '#2b6fd6' : '#1b2b4a';
+  ctx.lineWidth = 7;
+  ctx.beginPath(); ctx.moveTo(-5+pierna*0.6,-14); ctx.lineTo(-5+pierna,-4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(5-pierna*0.6,-14); ctx.lineTo(5-pierna,-4); ctx.stroke();
 
-        function mostrarBurbuja(texto) {
-            const escena = $('escena');
-            const burbuja = document.createElement('div');
-            burbuja.className = 'burbuja';
-            burbuja.textContent = texto;
-            escena.children[1].appendChild(burbuja);
-            setTimeout(() => burbuja.remove(), 1500);
-        }
+  // zapatos negros colegiales
+  ctx.fillStyle = '#111';
+  ctx.beginPath(); ctx.ellipse(-5+pierna,-2,7,4,0,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(5-pierna,-2,7,4,0,0,Math.PI*2); ctx.fill();
 
-        function siguiente() {
-            indice++;
-            if (indice >= preguntas.length) {
-                terminar(true);
-            } else {
-                mostrarPregunta();
-            }
-        }
+  // torso: remera blanca
+  ctx.fillStyle = '#f4f7f5';
+  ctx.beginPath();
+  ctx.roundRect(-11,-48,22,28,4);
+  ctx.fill();
 
-        function terminar(completo) {
-            $('pregunta').textContent = '';
-            $('opciones').innerHTML = '';
-            $('feedback').textContent = '';
-            $('btnSiguiente').classList.add('oculto');
-            $('final').classList.remove('oculto');
+  // pollera cuadrille (solo femenino) o pantalón (masculino)
+  if(genero==='f'){
+    const colores = ['#c62828','#1565c0','#2e7d32','#111'];
+    for(let i=0;i<4;i++){
+      ctx.fillStyle = colores[i];
+      ctx.fillRect(-14+i*7,-24,7,10);
+    }
+    ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 1;
+    for(let i=0;i<5;i++){
+      ctx.beginPath(); ctx.moveTo(-14+i*7,-24); ctx.lineTo(-14+i*7,-14); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.moveTo(-14,-18); ctx.lineTo(14,-18); ctx.stroke();
+  } else {
+    ctx.fillStyle = '#1b2b4a';
+    ctx.fillRect(-12,-26,24,14);
+  }
 
-            if (!completo) {
-                $('tituloFinal').textContent = '💔 Te quedaste sin vidas';
-                $('textoFinal').textContent = `Igual aprendiste algo importante. Conseguiste ${puntos} puntos. ¡Probá otra vez!`;
-            } else if (puntos === preguntas.length * 10) {
-                $('tituloFinal').textContent = '🏆 ¡Sos un Guardián de la Red!';
-                $('textoFinal').textContent = `Puntaje perfecto: ${puntos} puntos. Sabés cómo actuar frente al cyberbullying.`;
-            } else {
-                $('tituloFinal').textContent = '🎉 ¡Buen trabajo!';
-                $('textoFinal').textContent = `Terminaste con ${puntos} de ${preguntas.length * 10} puntos. Seguí practicando la empatía digital.`;
-            }
-        }
+  // campera azul (abierta, sobre los hombros)
+  ctx.fillStyle = genero==='f' ? '#1565c0' : '#152238';
+  ctx.beginPath(); ctx.roundRect(-14,-48,6,26,3); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(8,-48,6,26,3); ctx.fill();
 
-        // ---------- Eventos ----------
-        $('btnSiguiente').addEventListener('click', siguiente);
-        $('btnReiniciar').addEventListener('click', iniciarJuego);
+  // brazos
+  const brazo = baile ? -Math.abs(Math.sin(frame*0.25))*34 : paso*5;
+  ctx.strokeStyle = genero==='f' ? '#1565c0' : '#152238';
+  ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.moveTo(-13,-44); ctx.lineTo(-16, -30 + brazo); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(13,-44); ctx.lineTo(16, -30 - brazo); ctx.stroke();
 
-        iniciarJuego();
-    </script>
+  // manos
+  ctx.fillStyle = '#e8b98f';
+  ctx.beginPath(); ctx.arc(-16,-30+brazo,3.5,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(16,-30-brazo,3.5,0,Math.PI*2); ctx.fill();
+
+  // cabeza
+  ctx.fillStyle = '#e8b98f';
+  ctx.beginPath(); ctx.arc(0,-58,11,0,Math.PI*2); ctx.fill();
+
+  // pelo
+  if(genero==='f'){
+    // pelo largo castaño hasta debajo de los hombros
+    ctx.fillStyle = '#5d3a1a';
+    ctx.beginPath();
+    ctx.moveTo(-11,-62);
+    ctx.quadraticCurveTo(0,-76,11,-62);
+    ctx.lineTo(13,-28);
+    ctx.quadraticCurveTo(0,-24,-13,-28);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath(); ctx.arc(0,-62,11,Math.PI,0); ctx.fill();
+    // ojos marrones
+    ctx.fillStyle = '#4a2c0f';
+    ctx.fillRect(-6,-59,3,3); ctx.fillRect(3,-59,3,3);
+  } else {
+    // mullet: corto arriba, largo atrás
+    ctx.fillStyle = '#6b4423';
+    ctx.beginPath(); ctx.arc(0,-62,11,Math.PI,0); ctx.fill();
+    ctx.fillRect(-11,-63,22,4);
+    ctx.beginPath();
+    ctx.moveTo(-11,-60); ctx.lineTo(-13,-34); ctx.lineTo(-6,-36);
+    ctx.lineTo(-6,-58); ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(11,-60); ctx.lineTo(13,-34); ctx.lineTo(6,-36);
+    ctx.lineTo(6,-58); ctx.closePath(); ctx.fill();
+    // ojos
+    ctx.fillStyle = '#2b1a08';
+    ctx.fillRect(-6,-59,3,3); ctx.fillRect(3,-59,3,3);
+  }
+
+  // parpadeo de invulnerabilidad
+  ctx.restore();
+}
+
+/* ---------- dibujo del pasillo ---------- */
+function dibujarPasillo(){
+  // cielo/patio visto por el balcón
+  const grad = ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'#0d2a1e');
+  grad.addColorStop(.6,'#08170f');
+  grad.addColorStop(1,'#050d09');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,W,H);
+
+  // ventanas del fondo (balcón)
+  const offset = mundo.camX * 0.4;
+  for(let i=0;i<14;i++){
+    const x = i*160 - (offset % 160);
+    ctx.fillStyle = 'rgba(0,255,136,.06)';
+    ctx.fillRect(x+20, 60, 100, 120);
+    ctx.strokeStyle = 'rgba(0,255,136,.25)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x+20, 60, 100, 120);
+    ctx.beginPath();
+    ctx.moveTo(x+70,60); ctx.lineTo(x+70,180);
+    ctx.moveTo(x+20,120); ctx.lineTo(x+120,120);
+    ctx.stroke();
+  }
+
+  // baranda del balcón
+  ctx.strokeStyle = 'rgba(0,255,136,.35)';
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(0,200); ctx.lineTo(W,200); ctx.stroke();
+  for(let i=0;i<30;i++){
+    const x = i*40 - (offset % 40);
+    ctx.beginPath(); ctx.moveTo(x,200); ctx.lineTo(x,230); ctx.stroke();
+  }
+
+  // columnas rojas
+  const colOff = mundo.camX;
+  for(let i=0;i<12;i++){
+    const x = i*260 - (colOff % 260);
+    ctx.fillStyle = '#8e1b1b';
+    ctx.fillRect(x, 40, 34, SUELO-40);
+    ctx.fillStyle = '#b52a2a';
+    ctx.fillRect(x+4, 40, 8, SUELO-40);
+    ctx.fillStyle = '#5e0f0f';
+    ctx.fillRect(x, SUELO-14, 34, 14);
+    ctx.fillRect(x, 40, 34, 12);
+  }
+
+  // piso
+  ctx.fillStyle = '#0b1512';
+  ctx.fillRect(0, SUELO, W, H-SUELO);
+  ctx.strokeStyle = 'rgba(0,255,136,.25)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0,SUELO); ctx.lineTo(W,SUELO); ctx.stroke();
+
+  // baldosas en perspectiva
+  for(let i=0;i<24;i++){
+    const x = i*80 - (mundo.camX % 80);
+    ctx.strokeStyle = 'rgba(0,255,136,.08)';
+    ctx.beginPath(); ctx.moveTo(x,SUELO); ctx.lineTo(x-30,H); ctx.stroke();
+  }
+}
+
+/* ---------- obstáculos ---------- */
+function dibujarObstaculo(o){
+  const x = o.x - mundo.camX;
+  const y = o.y - o.h;
+  const flot = Math.sin(mundo.tiempo*0.06 + o.fase)*4;
+
+  ctx.save();
+  ctx.translate(x, y + flot);
+
+  if(o.tipo === 'binario'){
+    ctx.fillStyle = 'rgba(0,255,136,.12)';
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 2;
+    ctx.fillRect(0,0,o.w,o.h);
+    ctx.strokeRect(0,0,o.w,o.h);
+    ctx.fillStyle = '#00ff88';
+    ctx.font = 'bold 13px monospace';
+    ctx.fillText('01', 8, 18);
+    ctx.fillText('10', 8, 32);
+    ctx.fillText('11', 8, 46);
+  } else if(o.tipo === 'numero'){
+    ctx.fillStyle = '#ff2d55';
+    ctx.font = 'bold 40px Orbitron, monospace';
+    ctx.fillText(String(Math.floor(o.fase*7)%10), 8, 38);
+    ctx.strokeStyle = 'rgba(255,45,85,.4)';
+    ctx.strokeRect(0,0,o.w,o.h);
+  } else {
+    // anonimus: máscara
+    ctx.fillStyle = '#e8e8e8';
+    ctx.beginPath();
+    ctx.ellipse(o.w/2, o.h/2, o.w/2, o.h/2, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = '#111';
+    ctx.beginPath(); ctx.ellipse(o.w*0.32, o.h*0.42, 6, 4, -0.3, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(o.w*0.68, o.h*0.42, 6, 4, 0.3, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(o.w*0.3, o.h*0.7);
+    ctx.quadraticCurveTo(o.w*0.5, o.h*0.85, o.w*0.7, o.h*0.7);
+    ctx.strokeStyle = '#111'; ctx.lineWidth = 2; ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* ---------- coleccionables ---------- */
+function dibujarColeccionable(c){
+  if(c.tomado) return;
+  const x = c.x - mundo.camX;
+  const y = c.y + Math.sin(mundo.tiempo*0.08 + c.fase)*5;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.shadowColor = '#00ff88';
+  ctx.shadowBlur = 12;
+
+  if(c.tipo === 'lapiz'){
+    ctx.fillStyle = '#ffd400';
+    ctx.fillRect(0,4,20,6);
+    ctx.fillStyle = '#e8b98f';
+    ctx.beginPath(); ctx.moveTo(20,4); ctx.lineTo(26,7); ctx.lineTo(20,10); ctx.fill();
+    ctx.fillStyle = '#ff2d55'; ctx.fillRect(0,4,4,6);
+  } else if(c.tipo === 'fibra'){
+    ctx.fillStyle = '#1565c0';
+    ctx.fillRect(0,4,22,7);
+    ctx.fillStyle = '#0d47a1';
+    ctx.beginPath(); ctx.moveTo(22,4); ctx.lineTo(28,7.5); ctx.lineTo(22,11); ctx.fill();
+  } else {
+    ctx.fillStyle = '#c9ffe4';
+    ctx.fillRect(0,8,26,5);
+    ctx.fillStyle = '#00ff88';
+    for(let i=0;i<5;i++) ctx.fillRect(2+i*5,8,1.5,3);
+  }
+  ctx.restore();
+}
+
+/* ---------- meta ---------- */
+function dibujarMeta(){
+  const x = mundo.meta - mundo.camX;
+  // bandera roja
+  ctx.strokeStyle = '#9fdcc3'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(x+40, SUELO); ctx.lineTo(x+40, SUELO-150); ctx.stroke();
+  ctx.fillStyle = '#d32f2f';
+  ctx.beginPath();
+  ctx.moveTo(x+42, SUELO-150);
+  ctx.lineTo(x+110, SUELO-130 + Math.sin(mundo.tiempo*0.1)*6);
+  ctx.lineTo(x+42, SUELO-105);
+  ctx.closePath(); ctx.fill();
+
+  // línea de meta blanca y negra
+  for(let i=0;i<8;i++){
+    ctx.fillStyle = i%2 ? '#000' : '#fff';
+    ctx.fillRect(x + i*10, SUELO-4, 10, 8);
+    ctx.fillStyle = i%2 ? '#fff' : '#000';
+    ctx.fillRect(x + i*10, SUELO-12, 10, 8);
+  }
+}
+
+/* ---------- chispitas de los cañones ---------- */
+function crearChispas(){
+  const jx = mundo.jugador.x - mundo.camX;
+  [-30, 30].forEach(dx=>{
+    for(let i=0;i<3;i++){
+      mundo.particulas.push({
+        x: jx + dx,
+        y: SUELO - 40,
+        vx: dx*0.06 + (Math.random()-0.5)*3,
+        vy: -3 - Math.random()*4,
+        vida: 60,
+        color: `hsl(${Math.random()*360},100%,60%)`
+      });
+    }
+  });
+}
+
+function dibujarParticulas(){
+  mundo.particulas.forEach(p=>{
+    ctx.globalAlpha = Math.max(0, p.vida/60);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(p.x, p.y, 4, 4);
+  });
+  ctx.globalAlpha = 1;
+}
+
+/* ---------- lógica ---------- */
+function actualizar(){
+  mundo.tiempo++;
+  const j = mundo.jugador;
+
+  if(estado === 'ganado'){
+    j.baile++;
+    j.frame++;
+    if(j.baile % 4 === 0) crearChispas();
+    mundo.particulas.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.vida--; });
+    mundo.particulas = mundo.particulas.filter(p=>p.vida>0);
+    return;
+  }
+  if(estado !== 'corriendo') return;
+
+  j.frame++;
+  if(j.invuln > 0) j.invuln--;
+
+  // movimiento
+  const izq = teclas['arrowleft'] || teclas['a'] || toque.izq;
+  const der = teclas['arrowright'] || teclas['d'] || toque.der;
+  const salto = teclas['arrowup'] || teclas[' '] || toque.salto;
+
+  if(izq) j.x -= 4.2;
+  if(der) j.x += 4.2;
+  if(j.x < 20) j.x = 20;
+  if(j.x > LARGO_MUNDO - 40) j.x = LARGO_MUNDO - 40;
+
+  // salto
+  if(salto && j.enSuelo){
+    j.vy = -12;
+    j.enSuelo = false;
+  }
+  j.vy += 0.6;
+  j.y += j.vy;
+  if(j.y >= SUELO){ j.y = SUELO; j.vy = 0; j.enSuelo = true; }
+
+  // cámara
+  mundo.camX = j.x - 220;
+  if(mundo.camX < 0) mundo.camX = 0;
+
+  // colisiones con obstáculos
+  mundo.obstaculos.forEach(o=>{
+    const jx = j.x, jy = j.y;
+    const ox = o.x, oy = o.y - o.h;
+    if(jx + 14 > ox && jx - 14 < ox + o.w &&
+       jy > oy && jy - 70 < oy + o.h && j.invuln === 0){
+      j.vidas--;
+      j.invuln = 90;
+      j.x = Math.max(20, j.x - 60);
+      if(j.vidas <= 0){
+        estado = 'muerto';
+        msgTitulo.textContent = 'GAME OVER';
+        msgTexto.textContent = 'Te quedaste sin vidas. Volvé a intentarlo.';
+        msgBtn.textContent = 'REINTENTAR';
+        msg.classList.add('on');
+      }
+    }
+  });
+
+  // coleccionables
+  mundo.coleccionables.forEach(c=>{
+    if(c.tomado) return;
+    if(Math.abs(j.x - c.x) < 30 && Math.abs((j.y - 40) - c.y) < 60){
+      c.tomado = true;
+      j.puntos++;
+    }
+  });
+
+  // meta
+  if(j.x >= mundo.meta){
+    estado = 'ganado';
+    j.baile = 0;
+    msgTitulo.textContent = 'GANASTEEE, bien hecho';
+    msgTexto.textContent = `${jugador.nombre}, llegaste a la meta con ${j.puntos} útiles.`;
+    msgBtn.textContent = 'JUGAR OTRA VEZ';
+    setTimeout(()=> msg.classList.add('on'), 2600);
+  }
+
+  // partículas
+  mundo.particulas.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.12; p.vida--; });
+  mundo.particulas = mundo.particulas.filter(p=>p.vida>0);
+
+  actualizarHUD();
+}
+
+/* ---------- render ---------- */
+function render(){
+  ctx.clearRect(0,0,W,H);
+  dibujarPasillo();
+
+  mundo.obstaculos.forEach(dibujarObstaculo);
+  mundo.coleccionables.forEach(dibujarColeccionable);
+  dibujarMeta();
+
+  const j = mundo.jugador;
+  const jx = j.x - mundo.camX;
+  const parpadeo = j.invuln > 0 && Math.floor(mundo.tiempo/4)%2 === 0;
+  if(!parpadeo){
+    dibujarPersonaje(jx, j.y, jugador.genero, j.frame, estado==='ganado');
+  }
+  dibujarParticulas();
+
+  if(estado === 'ganado'){
+    ctx.fillStyle = '#00ff88';
+    ctx.font = 'bold 26px Orbitron, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('GANASTEEE, bien hecho', W/2, 70);
+    ctx.textAlign = 'left';
+  }
+}
+
+/* ---------- bucle ---------- */
+function loop(){
+  actualizar();
+  render();
+  requestAnimationFrame(loop);
+}
+loop();
+
+msgBtn.addEventListener('click', ()=>{
+  resetJuego();
+});
+</script>
 </body>
-
 </html>
