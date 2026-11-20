@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alto al Cyberbullying</title>
+    <style>
+        :root {
+            --navy: #0a1730;
+            --navy-2: #0f2244;
+            --navy-3: #16305c;
+            --coral: #ff5d73;
+            --coral-dark: #e03e56;
+            --mint: #4ee1c1;
+            --violet: #9b7bff;
+            --gold: #ffd166;
+            --white: #f7f9ff;
+            --muted: #a9bad8;
+            --glass: rgba(255, 255, 255, .06);
+            --line: rgba(255, 255, 255, .12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, Tahoma, sans-serif;
+            color: var(--white);
+            line-height: 1.65;
+            min-height: 100vh;
+            background:
+                radial-gradient(1000px 600px at 12% -10%, rgba(155, 123, 255, .28), transparent 60%),
+                radial-gradient(900px 520px at 88% 0%, rgba(78, 225, 193, .18), transparent 60%),
+                radial-gradient(800px 600px at 50% 110%, rgba(255, 93, 115, .18), transparent 60%),
+                linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 55%, var(--navy) 100%);
+            background-attachment: fixed;
+        }
+
+        /* ---------- ENCABEZADO ---------- */
+        header {
+            position: relative;
+            padding: 34px 20px 40px;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--violet), var(--coral), var(--gold), var(--mint), var(--violet));
+            background-size: 300% 100%;
+            animation: correr 8s linear infinite;
+        }
+
+        @keyframes correr {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- LOGO ANIMADO ---------- */
+        .logo-marco {
+            position: relative;
+            width: 132px;
+            height: 132px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+        }
+
+        /* halo pulsante */
+        .logo-marco::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 93, 115, .55), transparent 68%);
+            animation: halo 2.6s ease-in-out infinite;
+        }
+
+        @keyframes halo {
+
+            0%,
+            100% {
+                transform: scale(.9);
+                opacity: .55;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        /* anillo giratorio */
+        .logo-marco::after {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border-radius: 50%;
+            border: 2px dashed rgba(78, 225, 193, .5);
+            animation: girar 14s linear infinite;
+        }
+
+        @keyframes girar {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .logo-svg {
+            position: relative;
+            width: 104px;
+            height: 104px;
+            z-index: 2;
+            animation: flotarLogo 3.4s ease-in-out infinite;
+            filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .45));
+        }
+
+        @keyframes flotarLogo {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-9px) rotate(2deg);
+            }
+        }
+
+        /* el círculo del logo se dibuja solo */
+        .anillo-prohibido {
+            stroke-dasharray: 352;
+            stroke-dashoffset: 352;
+            animation: dibujar 3s ease forwards, latir 2.4s ease-in-out 3s infinite;
+        }
+
+        @keyframes dibujar {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes latir {
+
+            0%,
+            100% {
+                stroke-width: 8;
+                opacity: 1;
+            }
+
+            50% {
+                stroke-width: 10;
+                opacity: .75;
+            }
+        }
+
+        /* la línea diagonal aparece después */
+        .linea-prohibido {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: dibujarLinea 1s ease 1.2s forwards;
+        }
+
+        @keyframes dibujarLinea {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* las manos "saludan" */
+        .mano {
+            transform-origin: center;
+            animation: saludar 3.4s ease-in-out infinite;
+        }
+
+        .mano-izq {
+            animation-delay: 0s;
+        }
+
+        .mano-der {
+            animation-delay: .35s;
+        }
+
+        @keyframes saludar {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        header h1 {
+            font-size: clamp(1.7rem, 4.2vw, 3rem);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.15;
+            background: linear-gradient(90deg, #fff 0%, var(--coral) 45%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header p {
+            color: var(--muted);
+            margin-top: 10px;
+            font-size: 1rem;
+            letter-spacing: .4px;
+        }
+
+        /* ---------- CASITAS ---------- */
+        .casitas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 26px;
+            max-width: 1120px;
+            margin: 56px auto;
+            padding: 0 22px;
+        }
+
+        .casita {
+            position: relative;
+            background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 30px 26px;
+            overflow: hidden;
+            transition: transform .3s, box-shadow .3s, border-color .3s;
+        }
+
+        .casita::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .casita:nth-child(1)::before {
+            background: linear-gradient(90deg, var(--violet), var(--coral));
+        }
+
+        .casita:nth-child(2)::before {
+            background: linear-gradient(90deg, var(--coral), var(--gold));
+        }
+
+        .casita:nth-child(3)::before {
+            background: linear-gradient(90deg, var(--mint), var(--violet));
+        }
+
+        .casita:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, .28);
+            box-shadow: 0 22px 46px rgba(0, 0, 0, .45);
+        }
+
+        .casita .icono {
+            display: inline-grid;
+            place-items: center;
+            width: 58px;
+            height: 58px;
+            font-size: 1.8rem;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--line);
+        }
+
+        .casita h2 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .casita:nth-child(1) h2 {
+            color: var(--violet);
+        }
+
+        .casita:nth-child(2) h2 {
+            color: var(--gold);
+        }
+
+        .casita:nth-child(3) h2 {
+            color: var(--mint);
+        }
+
+        .casita p,
+        .casita li {
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        .casita ul {
+            padding-left: 18px;
+            margin-top: 10px;
+        }
+
+        .casita li {
+            margin-bottom: 4px;
+        }
+
+        .casita strong {
+            color: var(--white);
+        }
+
+        /* ---------- JUEGO ---------- */
+        .juego {
+            max-width: 920px;
+            margin: 10px auto 80px;
+            padding: 0 22px;
+        }
+
+        .juego h2 {
+            text-align: center;
+            font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+            margin-bottom: 6px;
+        }
+
+        .juego .sub {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 26px;
+        }
+
+        .panel {
+            background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 30px 26px;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, .4);
+        }
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+            font-weight: 600;
+            font-size: .95rem;
+            color: var(--muted);
+        }
+
+        .barra .puntaje {
+            color: var(--gold);
+        }
+
+        .barra .vidas {
+            letter-spacing: 3px;
+        }
+
+        .escena {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 34px;
+            min-height: 180px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .persona {
+            position: relative;
+            width: 90px;
+            height: 150px;
+            animation: flotar 2.4s ease-in-out infinite;
+        }
+
+        .persona:nth-child(2) {
+            animation-delay: .4s;
+        }
+
+        .persona:nth-child(3) {
+            animation-delay: .8s;
+        }
+
+        @keyframes flotar {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .cabeza {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #ffe0c4, #ffcda8);
+            margin: 0 auto;
+            position: relative;
+            border: 3px solid rgba(10, 23, 48, .85);
+        }
+
+        .cabeza::before,
+        .cabeza::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            width: 6px;
+            height: 6px;
+            background: #0a1730;
+            border-radius: 50%;
+        }
+
+        .cabeza::before {
+            left: 12px;
+        }
+
+        .cabeza::after {
+            right: 12px;
+        }
+
+        .boca {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 8px;
+            border-bottom: 3px solid #0a1730;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .cuerpo {
+            width: 70px;
+            height: 80px;
+            margin: 4px auto 0;
+            border-radius: 18px 18px 10px 10px;
+            background: linear-gradient(180deg, var(--coral), var(--coral-dark));
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .35);
+        }
+
+        .persona.azul .cuerpo {
+            background: linear-gradient(180deg, #6ea8ff, #3b6fd4);
+        }
+
+        .persona.verde .cuerpo {
+            background: linear-gradient(180deg, var(--mint), #22a98d);
+        }
+
+        .burbuja {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            color: #0a1730;
+            font-size: .75rem;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 14px;
+            white-space: nowrap;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+            animation: aparecer .4s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 10px) scale(.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0) scale(1);
+            }
+        }
+
+        .pregunta {
+            text-align: center;
+            font-size: 1.12rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            min-height: 58px;
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 14px;
+        }
+
+        .opciones button {
+            padding: 17px 18px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .05);
+            color: var(--white);
+            font-size: .98rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .22s;
+            text-align: left;
+        }
+
+        .opciones button:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(155, 123, 255, .28), rgba(255, 93, 115, .28));
+            border-color: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .opciones button.correcta {
+            background: linear-gradient(135deg, rgba(78, 225, 193, .35), rgba(34, 169, 141, .35));
+            border-color: var(--mint);
+        }
+
+        .opciones button.incorrecta {
+            background: linear-gradient(135deg, rgba(255, 93, 115, .35), rgba(224, 62, 86, .35));
+            border-color: var(--coral);
+        }
+
+        .opciones button:disabled {
+            cursor: default;
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+            min-height: 30px;
+            font-size: .95rem;
+        }
+
+        .feedback.ok {
+            color: var(--mint);
+        }
+
+        .feedback.no {
+            color: #ff9aa8;
+        }
+
+        .siguiente {
+            display: block;
+            margin: 20px auto 0;
+            padding: 13px 36px;
+            background: linear-gradient(135deg, var(--coral), var(--violet));
+            color: #fff;
+            border: none;
+            border-radius: 32px;
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 26px rgba(255, 93, 115, .35);
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .siguiente:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 14px 32px rgba(155, 123, 255, .45);
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .final {
+            text-align: center;
+            padding: 16px 0 6px;
+        }
+
+        .final h3 {
+            font-size: 1.7rem;
+            margin-bottom: 12px;
+            color: var(--gold);
+        }
+
+        .final p {
+            margin-bottom: 18px;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 26px 20px;
+            color: var(--muted);
+            font-size: .85rem;
+            border-top: 1px solid var(--line);
+        }
+
+        @media (max-width:520px) {
+            .escena {
+                gap: 18px;
+            }
+
+            .persona {
+                width: 74px;
+                height: 130px;
+            }
+
+            .cuerpo {
+                width: 58px;
+                height: 66px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============ ENCABEZADO ============ -->
+    <header>
+        <div class="logo">
+            <div class="logo-marco">
+                <svg class="logo-svg" viewBox="0 0 120 120" aria-label="Logo: alto al cyberbullying">
+                    <defs>
+                        <linearGradient id="gradRojo" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ff8a9b" />
+                            <stop offset="100%" stop-color="#e03e56" />
+                        </linearGradient>
+                        <linearGradient id="gradMano" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="100%" stop-color="#cfe0ff" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- círculo de prohibido (se dibuja solo) -->
+                    <circle class="anillo-prohibido" cx="60" cy="60" r="56" fill="none" stroke="url(#gradRojo)"
+                        stroke-width="8" />
+
+                    <!-- mano izquierda -->
+                    <path class="mano mano-izq"
+                        d="M22 78 V52 a4 4 0 0 1 8 0 v-8 a4 4 0 0 1 8 0 v-4 a4 4 0 0 1 8 0 v6 a4 4 0 0 1 8 0 v32 c0 8 -6 14 -14 14 h-6 c-6 0 -12 -6 -12 -14z"
+                        fill="url(#gradMano)" />
+
+                    <!-- mano derecha (espejada) -->
+                    <path class="mano mano-der"
+                        d="M22 78 V52 a4 4 0 0 1 8 0 v-8 a4 4 0 0 1 8 0 v-4 a4 4 0 0 1 8 0 v6 a4 4 0 0 1 8 0 v32 c0 8 -6 14 -14 14 h-6 c-6 0 -12 -6 -12 -14z"
+                        fill="url(#gradMano)" transform="translate(120 0) scale(-1 1)" />
+
+                    <!-- línea diagonal (aparece después) -->
+                    <line class="linea-prohibido" x1="22" y1="98" x2="98" y2="22" stroke="url(#gradRojo)"
+                        stroke-width="8" stroke-linecap="round" />
+                </svg>
+            </div>
+
+            <div>
+                <h1>Alto al Cyberbullying</h1>
+                <p>Respeto, empatía y valentía en la red</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ LAS 3 CASITAS ============ -->
+    <section class="casitas">
+        <article class="casita">
+            <span class="icono">🧠</span>
+            <h2>¿Qué es el cyberbullying?</h2>
+            <p>Es el acoso que ocurre a través de celulares, redes sociales, chats y videojuegos. Incluye mensajes
+                hirientes, burlas, rumores, exclusión y compartir fotos sin permiso.</p>
+            <ul>
+                <li>Puede pasar las 24 horas</li>
+                <li>Llega a mucha gente muy rápido</li>
+                <li>Deja huellas digitales</li>
+            </ul>
+        </article>
+
+        <article class="casita">
+            <span class="icono">🚨</span>
+            <h2>Señales de alerta</h2>
+            <p>Prestá atención si alguien:</p>
+            <ul>
+                <li>Se enoja o se pone nervioso al ver el celular</li>
+                <li>Se aísla o no quiere ir a la escuela</li>
+                <li>Borra cuentas o cambia de número</li>
+                <li>Se pone triste, ansioso o irritable</li>
+            </ul>
+        </article>
+
+        <article class="casita">
+            <span class="icono">🤝</span>
+            <h2>¿Qué podés hacer?</h2>
+            <ul>
+                <li><strong>No respondas</strong> con más agresión</li>
+                <li><strong>Guardá pruebas</strong> (capturas de pantalla)</li>
+                <li><strong>Bloqueá y reportá</strong> al agresor</li>
+                <li><strong>Contale</strong> a un adulto de confianza</li>
+                <li><strong>Apoyá</strong> a quien lo sufre</li>
+            </ul>
+        </article>
+    </section>
+
+    <!-- ============ JUEGO INTERACTIVO ============ -->
+    <section class="juego">
+        <h2>🎮 Juego: "Guardián de la Red"</h2>
+        <p class="sub">Ayudá a los personajes a tomar la mejor decisión. ¡Tenés 3 vidas!</p>
+
+        <div class="panel">
+            <div class="barra">
+                <span>Pregunta <span id="numPregunta">1</span> de <span id="totalPreguntas">6</span></span>
+                <span class="puntaje">⭐ Puntos: <span id="puntos">0</span></span>
+                <span class="vidas" id="vidas">❤️❤️❤️</span>
+            </div>
+
+            <div class="escena" id="escena">
+                <div class="persona">
+                    <div class="cabeza">
+                        <div class="boca"></div>
+                    </div>
+                    <div class="cuerpo"></div>
+                </div>
+                <div class="persona azul">
+                    <div class="cabeza">
+                        <div class="boca"></div>
+                    </div>
+                    <div class="cuerpo"></div>
+                </div>
+                <div class="persona verde">
+                    <div class="cabeza">
+                        <div class="boca"></div>
+                    </div>
+                    <div class="cuerpo"></div>
+                </div>
+            </div>
+
+            <p class="pregunta" id="pregunta">Cargando...</p>
+
+            <div class="opciones" id="opciones"></div>
+
+            <p class="feedback" id="feedback"></p>
+
+            <button class="siguiente oculto" id="btnSiguiente">Siguiente ➜</button>
+
+            <div class="final oculto" id="final">
+                <h3 id="tituloFinal"></h3>
+                <p id="textoFinal"></p>
+                <button class="siguiente" id="btnReiniciar">🔁 Jugar de nuevo</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>Hecho con empatía 💙 — Compartí respeto, no bullying.</footer>
+
+    <script>
+        // ---------- Datos del juego ----------
+        const preguntas = [
+            {
+                texto: "Lucía recibe mensajes feos en el chat del grupo. ¿Qué debería hacer?",
+                opciones: [
+                    "Responder con insultos más fuertes",
+                    "Guardar capturas, bloquear y contarle a un adulto",
+                    "Borrar todo y no decir nada"
+                ],
+                correcta: 1,
+                explicacion: "Guardar pruebas y pedir ayuda es lo más seguro. Responder con agresión solo empeora la situación."
+            },
+            {
+                texto: "Tomás ve que a un compañero le hacen memes burlándose de él. ¿Qué hace?",
+                opciones: [
+                    "Los comparte para reírse con todos",
+                    "No dice nada, no es su problema",
+                    "No los comparte y le escribe para apoyarlo"
+                ],
+                correcta: 2,
+                explicacion: "No compartir y mostrar apoyo puede cambiarle el día a alguien. Los testigos son clave."
+            },
+            {
+                texto: "Una amiga te cuenta que la están acosando en redes. ¿Qué le decís?",
+                opciones: [
+                    "Que es su culpa por publicar fotos",
+                    "Que le creés y que juntos pueden hablar con un adulto",
+                    "Que lo ignore y ya va a pasar"
+                ],
+                correcta: 1,
+                explicacion: "Creer y acompañar es fundamental. Nunca es culpa de quien sufre el acoso."
+            },
+            {
+                texto: "Alguien te pide la contraseña de tu cuenta para 'jugar una broma'. ¿Qué hacés?",
+                opciones: [
+                    "Se la das, es un amigo",
+                    "No se la das y le explicás por qué es peligroso",
+                    "Se la das pero después la cambiás"
+                ],
+                correcta: 1,
+                explicacion: "Las contraseñas son privadas. Compartirlas puede terminar en suplantación de identidad."
+            },
+            {
+                texto: "Ves una foto privada de una compañera circulando sin su permiso. ¿Qué hacés?",
+                opciones: [
+                    "La reenvío a otros grupos",
+                    "La borro y aviso a un adulto responsable",
+                    "La guardo por si acaso"
+                ],
+                correcta: 1,
+                explicacion: "Compartir imágenes sin permiso es acoso y puede ser delito. Borrar y avisar es lo correcto."
+            },
+            {
+                texto: "Un desconocido empieza a insultarte en un videojuego. ¿Qué es lo mejor?",
+                opciones: [
+                    "Insultarlo más fuerte para que se calle",
+                    "Reportarlo, silenciarlo y seguir jugando",
+                    "Darle tu número para arreglarlo en privado"
+                ],
+                correcta: 1,
+                explicacion: "Reportar y silenciar te protege. Nunca compartas datos personales con desconocidos."
+            }
+        ];
+
+        // ---------- Estado ----------
+        let indice = 0;
+        let puntos = 0;
+        let vidas = 3;
+        let respondido = false;
+
+        const $ = id => document.getElementById(id);
+
+        function iniciarJuego() {
+            indice = 0;
+            puntos = 0;
+            vidas = 3;
+            $('final').classList.add('oculto');
+            $('totalPreguntas').textContent = preguntas.length;
+            actualizarBarra();
+            mostrarPregunta();
+        }
+
+        function actualizarBarra() {
+            $('numPregunta').textContent = Math.min(indice + 1, preguntas.length);
+            $('puntos').textContent = puntos;
+            const llenas = Math.max(vidas, 0);
+            $('vidas').textContent = '❤️'.repeat(llenas) + '🖤'.repeat(3 - llenas);
+        }
+
+        function mostrarPregunta() {
+            respondido = false;
+            const p = preguntas[indice];
+            $('pregunta').textContent = p.texto;
+            $('feedback').textContent = '';
+            $('feedback').className = 'feedback';
+            $('btnSiguiente').classList.add('oculto');
+
+            const cont = $('opciones');
+            cont.innerHTML = '';
+
+            p.opciones.forEach((op, i) => {
+                const btn = document.createElement('button');
+                btn.textContent = op;
+                btn.addEventListener('click', () => responder(i, btn));
+                cont.appendChild(btn);
+            });
+
+            actualizarBarra();
+        }
+
+        function responder(i, btn) {
+            if (respondido) return;
+            respondido = true;
+
+            const p = preguntas[indice];
+            const botones = document.querySelectorAll('#opciones button');
+            botones.forEach(b => b.disabled = true);
+
+            if (i === p.correcta) {
+                btn.classList.add('correcta');
+                puntos += 10;
+                $('feedback').textContent = '✅ ¡Correcto! ' + p.explicacion;
+                $('feedback').className = 'feedback ok';
+                mostrarBurbuja('¡Genial!');
+            } else {
+                btn.classList.add('incorrecta');
+                botones[p.correcta].classList.add('correcta');
+                vidas--;
+                $('feedback').textContent = '❌ Casi. ' + p.explicacion;
+                $('feedback').className = 'feedback no';
+                mostrarBurbuja('¡Uy!');
+            }
+
+            actualizarBarra();
+
+            if (vidas <= 0) {
+                setTimeout(() => terminar(false), 1200);
+                return;
+            }
+
+            $('btnSiguiente').classList.remove('oculto');
+            $('btnSiguiente').textContent = (indice === preguntas.length - 1) ? 'Ver resultado 🏁' : 'Siguiente ➜';
+        }
+
+        function mostrarBurbuja(texto) {
+            const escena = $('escena');
+            const burbuja = document.createElement('div');
+            burbuja.className = 'burbuja';
+            burbuja.textContent = texto;
+            escena.children[1].appendChild(burbuja);
+            setTimeout(() => burbuja.remove(), 1500);
+        }
+
+        function siguiente() {
+            indice++;
+            if (indice >= preguntas.length) {
+                terminar(true);
+            } else {
+                mostrarPregunta();
+            }
+        }
+
+        function terminar(completo) {
+            $('pregunta').textContent = '';
+            $('opciones').innerHTML = '';
+            $('feedback').textContent = '';
+            $('btnSiguiente').classList.add('oculto');
+            $('final').classList.remove('oculto');
+
+            if (!completo) {
+                $('tituloFinal').textContent = '💔 Te quedaste sin vidas';
+                $('textoFinal').textContent = `Igual aprendiste algo importante. Conseguiste ${puntos} puntos. ¡Probá otra vez!`;
+            } else if (puntos === preguntas.length * 10) {
+                $('tituloFinal').textContent = '🏆 ¡Sos un Guardián de la Red!';
+                $('textoFinal').textContent = `Puntaje perfecto: ${puntos} puntos. Sabés cómo actuar frente al cyberbullying.`;
+            } else {
+                $('tituloFinal').textContent = '🎉 ¡Buen trabajo!';
+                $('textoFinal').textContent = `Terminaste con ${puntos} de ${preguntas.length * 10} puntos. Seguí practicando la empatía digital.`;
+            }
+        }
+
+        // ---------- Eventos ----------
+        $('btnSiguiente').addEventListener('click', siguiente);
+        $('btnReiniciar').addEventListener('click', iniciarJuego);
+
+        iniciarJuego();
+    </script>
+</body>
+
+</html>
